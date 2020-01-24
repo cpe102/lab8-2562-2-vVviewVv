@@ -3,6 +3,15 @@
 using namespace std;
 
 int main(){	
+	int year=1,i=0;
+	double loan,rate,pay,newb,RP,TT;
+	
+	cout << "Enter initial loan: ";
+	cin >> loan;
+	cout << "Enter inierest rate  per year (%): ";
+	cin >> rate;
+	cout << "enter amount you can payper year: ";
+	cin >> pay;
 
 	//use 'setw' to set width of table and 'left' to set left-alignment
 	//you can change input argument of 'setw()' to see the effect
@@ -17,14 +26,43 @@ int main(){
 	
 	//use 'fixed' and 'setprecision' to fix the number of decimal digits for displaying
 	//you can change input argument of 'setprecision()' to see the effect
-	cout << fixed << setprecision(2); 
-	cout << setw(13) << left << 1; 
-	cout << setw(13) << left << 1000.0;
-	cout << setw(13) << left << 50.0;
-	cout << setw(13) << left << 1050.0;
-	cout << setw(13) << left << 100.0;
-	cout << setw(13) << left << 950.0;
-	cout << "\n";	
+	while(newb != 0){
+
+		RP = loan*(rate/100);
+		TT = loan+RP;
+		newb = TT-pay;
+		if(loan < pay) newb=0,pay=TT;
+		
+		
+		cout << fixed << setprecision(2); 
+		cout << setw(13) << left << year; 
+		cout << setw(13) << left << loan*1.00;
+		cout << setw(13) << left << RP*1.00;
+		cout << setw(13) << left << TT*1.00;
+		cout << setw(13) << left << pay*1.00;
+		cout << setw(13) << left << newb*1.00;
+		cout << "\n";
+		if(loan < pay) pay = 0;
+		loan = newb;
+		if(newb < pay){
+			year++;
+			RP = loan*(rate/100);
+			TT = loan+RP;
+			pay = TT;
+			newb = 0;
+			cout << fixed << setprecision(2); 
+			cout << setw(13) << left << year; 
+			cout << setw(13) << left << loan*1.00;
+			cout << setw(13) << left << RP*1.00;
+			cout << setw(13) << left << TT*1.00;
+			cout << setw(13) << left << pay*1.00;
+			cout << setw(13) << left << newb*1.00;
+			cout << "\n";
 	
+		}	
+		year++;
+	}
+		
+		
 	return 0;
 }
